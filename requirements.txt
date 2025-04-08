@@ -1,0 +1,11 @@
+numpy
+swig
+matplotlib
+moviepy
+gym
+torch
+torchvision
+torchaudio
+gym[box2d]
+scipy
+mlflow
