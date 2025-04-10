@@ -1,5 +1,3 @@
-Here's a more polished version of your README that incorporates the suggestions I mentioned:
-
 ---
 
 # Solving Lunar Lander with DQN
