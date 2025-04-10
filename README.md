@@ -134,7 +134,7 @@ After training is complete, you can generate a video of the agent interacting wi
 
 ### 1. Update the Checkpoint Path
 
-In the `inference_and_video.py` script, modify the `checkpoint_path` variable to point to the path of the best model you want to use. You can get this path from the MLflow UI.
+In the `inference_and_video.py` script, change the value of the hyperparameters to the ones related to the best model, and modify the `checkpoint_path` variable to point to the model. You can get this path from the MLflow UI.
 
 ### Locate the Artifacts Section
 In the experiment run details page, you will find an Artifacts tab. Click on it to expand the artifacts associated with the selected run. Within this section, look for a directory called model/ or similar. This is where the model checkpoint is stored.
