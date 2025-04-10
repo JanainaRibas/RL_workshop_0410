@@ -52,10 +52,8 @@ class DQNAgent:
         """Returns action for given state as per current policy."""
         state = torch.FloatTensor(state).unsqueeze(0).to(self.device)
         
-        # -----------------------------------------------------------------------------
-        # TODO: Implement epsilon-greedy action selection
-        # -----------------------------------------------------------------------------
-        
+        if random.random() < self.epsilon:
+            return random.choice(range(self.action_size))
         # Select action with max Q value
         with torch.no_grad():
             action_values = self.m_qnetwork(state)
@@ -63,9 +61,7 @@ class DQNAgent:
     
     def store_experience(self, state, action, reward, next_state, done):
         """Stores experience in replay memory."""
-        # -----------------------------------------------------------------------------
-        # TODO: Store experience in replay memory
-        # -----------------------------------------------------------------------------
+        self.memory.add(state, action, reward, next_state, done)
     
     def train(self):
         """Train the agent based on the experiences in the replay memory."""
@@ -80,10 +76,7 @@ class DQNAgent:
 
             q_values = self.m_qnetwork(states).gather(1, actions)
             next_q_values = self.t_qnetwork(next_states).max(1)[0].detach().unsqueeze(1)
-            # -----------------------------------------------------------------------------
-            # TODO: Compute the target Q values here
-            targets = n.zeros(self.batch_size, dtype=np.float32)
-            # -----------------------------------------------------------------------------
+            targets = rewards + (1 - dones) * self.gamma * next_q_values
 
             loss = F.mse_loss(q_values, targets)
             self.optimizer.zero_grad()
